@@ -30,7 +30,7 @@ public class ProductController {
 
 
     @PostMapping("/products")                           // 容易忘記@Valid
-    public ResponseEntity<Product> creatProduct(@RequestBody @Valid ProductRequest productRequest) {
+    public ResponseEntity<Product> createProducte(@RequestBody @Valid ProductRequest productRequest) {
 
         Integer productId = productService.createProduct(productRequest);
 
@@ -55,6 +55,15 @@ public class ProductController {
         Product updateProduct = productService.getProductById(productId);
 
         return ResponseEntity.status(HttpStatus.OK).body(updateProduct);
+    }
+
+
+
+    @DeleteMapping("/products/{productId}")
+    public ResponseEntity<?> deleteProduct(@PathVariable Integer productId) {
+        productService.deleteProductById(productId);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();    // 204
     }
 
 
