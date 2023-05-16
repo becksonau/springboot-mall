@@ -1,6 +1,7 @@
 package com.becksonsee.springbootmall.controller;
 
 import com.becksonsee.springbootmall.constant.ProductCategory;
+import com.becksonsee.springbootmall.dto.ProductQueryParams;
 import com.becksonsee.springbootmall.dto.ProductRequest;
 import com.becksonsee.springbootmall.model.Product;
 import com.becksonsee.springbootmall.service.ProductService;
@@ -24,7 +25,12 @@ public class ProductController {
             @RequestParam(required = false) ProductCategory category,
             @RequestParam(required = false) String search
     ) {
-        List<Product> productList = productService.getProducts(category, search) ;
+        ProductQueryParams productQueryParams = new ProductQueryParams();
+        productQueryParams.setCategory(category);
+        productQueryParams.setSearch(search);
+
+
+        List<Product> productList = productService.getProducts(productQueryParams) ;
 
         return ResponseEntity.status(HttpStatus.OK).body(productList);
     }

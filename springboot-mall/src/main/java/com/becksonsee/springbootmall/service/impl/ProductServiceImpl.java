@@ -2,6 +2,7 @@ package com.becksonsee.springbootmall.service.impl;
 
 import com.becksonsee.springbootmall.constant.ProductCategory;
 import com.becksonsee.springbootmall.dao.ProductDao;
+import com.becksonsee.springbootmall.dto.ProductQueryParams;
 import com.becksonsee.springbootmall.dto.ProductRequest;
 import com.becksonsee.springbootmall.model.Product;
 import com.becksonsee.springbootmall.service.ProductService;
@@ -17,9 +18,9 @@ public class ProductServiceImpl implements ProductService {
     private ProductDao productDao ;
 
     @Override
-    public List<Product> getProducts(ProductCategory category, String search) {
+    public List<Product> getProducts(ProductQueryParams productQueryParams) {
 
-        return productDao.getProducts(category, search);
+        return productDao.getProducts(productQueryParams);
     }
 
     @Override
