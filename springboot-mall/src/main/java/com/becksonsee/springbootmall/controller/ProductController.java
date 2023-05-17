@@ -17,6 +17,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.util.List;
+import java.util.Map;
 
 @Validated          // 裡面的方法有@Max 或 @Min
 @RestController
@@ -114,6 +115,8 @@ public class ProductController {
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();    // 204
     }
+
+
 
 
 }
