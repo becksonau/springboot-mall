@@ -1,5 +1,6 @@
 package com.becksonsee.springbootmall.controller;
 
+import com.becksonsee.springbootmall.dto.UserLoginRequest;
 import com.becksonsee.springbootmall.dto.UserRegisterRequest;
 import com.becksonsee.springbootmall.model.User;
 import com.becksonsee.springbootmall.service.UserService;
@@ -27,6 +28,14 @@ public class UserController {
         User user = userService.getUserById(userId);
 
         return  ResponseEntity.status(HttpStatus.CREATED).body(user);
+    }
+
+    @PostMapping("/users/login")    // 與註冊功能做對應與區別
+    public ResponseEntity<User> login(@RequestBody @Valid UserLoginRequest userLoginRequest) {
+
+        User user = userService.login(userLoginRequest);
+
+        return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 
 }

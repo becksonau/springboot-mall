@@ -1,6 +1,7 @@
 package com.becksonsee.springbootmall.service.impl;
 
 import com.becksonsee.springbootmall.dao.UserDao;
+import com.becksonsee.springbootmall.dto.UserLoginRequest;
 import com.becksonsee.springbootmall.dto.UserRegisterRequest;
 import com.becksonsee.springbootmall.model.User;
 import com.becksonsee.springbootmall.service.UserService;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 
+// 複雜的判斷邏輯還有資料檢查比對都做在service層，不要寫在Dao層
 @Component
 public class UserServiceImpl implements UserService {
 
@@ -36,5 +38,24 @@ public class UserServiceImpl implements UserService {
 
         // 創建帳號
         return userDao.createUser(userRegisterRequest);
+    }
+
+    @Override
+    public User login(UserLoginRequest userLoginRequest) {
+
+        User user = userDao.getUserByEmail(userLoginRequest.getEmail());
+
+        if(user == null) {
+            log.warn("該 email {} 尚未註冊", userLoginRequest.getEmail());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+        if(user.getPassword().equals(userLoginRequest.getPassword())) {
+            return user;
+        } else {
+            log.warn("email {} 的密碼不正確", userLoginRequest.getEmail());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
     }
 }
