@@ -4,6 +4,7 @@ import com.becksonsee.springbootmall.dao.OrderDao;
 import com.becksonsee.springbootmall.dao.ProductDao;
 import com.becksonsee.springbootmall.dto.BuyItem;
 import com.becksonsee.springbootmall.dto.CreateOrderRequest;
+import com.becksonsee.springbootmall.model.Order;
 import com.becksonsee.springbootmall.model.OrderItem;
 import com.becksonsee.springbootmall.model.Product;
 import com.becksonsee.springbootmall.service.OrderService;
@@ -22,6 +23,17 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private ProductDao productDao;
+
+    @Override
+    public Order getOrderById(Integer orderId) {
+        Order order = orderDao.getOrderById(orderId);
+
+        List<OrderItem> orderItemList = orderDao.getOrderItemsByOrderId(orderId);
+
+        order.setOrderItemList(orderItemList);
+
+        return order;
+    }
 
     @Transactional      // 多張 table 要用 @Transactional 確保此兩張 table 同時啟動
     @Override
@@ -52,6 +64,6 @@ public class OrderServiceImpl implements OrderService {
 
         orderDao.createOrderItems(orderId, orderItemList);
 
-        return userId;
+        return orderId;
     }
 }
