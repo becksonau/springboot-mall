@@ -19,4 +19,3 @@ CREATE TABLE IF NOT EXISTS user
     created_date       TIMESTAMP    NOT NULL,
     last_modified_date TIMESTAMP    NOT NULL
     );
-
