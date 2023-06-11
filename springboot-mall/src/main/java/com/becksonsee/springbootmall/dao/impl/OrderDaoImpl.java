@@ -60,23 +60,23 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public void createOrderItems(Integer orderId, List<OrderItem> orderItemList) {
-        /*
+
 
         // 使用 for loop 一條一條 sql 加入數據，效率較低
-        for(OrderItem orderItem : orderItemList) {
+//        for(OrderItem orderItem : orderItemList) {
+//
+//            String sql = "INSERT INTO order_item(user_id, product_id, quantity, amount) " +
+//                    " VALUES (:userId, :productId, :quantity, :amount) " ;
+//
+//            Map<String, Object> map = new HashMap<>();
+//            map.put("orderId", orderId);
+//            map.put("productId", orderItem.getProductId());
+//            map.put("quantity", orderItem.getQuantity());
+//            map.put("amount", orderItem.getAmount());
+//
+//            namedParameterJdbcTemplate.update(sql, map);
+//        }
 
-            String sql = "INSERT INTO order_item(user_id, product_id, quantity, amount) " +
-                    " VALUES (:userId, :productId, :quantity, :amount) " ;
-
-            Map<String, Object> map = new HashMap<>();
-            map.put("orderId", orderId);
-            map.put("productId", orderItem.getProductId());
-            map.put("quantity", orderItem.getQuantity());
-            map.put("amount", orderItem.getAmount());
-
-            namedParameterJdbcTemplate.update(sql, map);
-        }
-        */
 
 
         // 使用 bathUpdate 一次性加入數據，效率更高， 5-5
@@ -118,7 +118,7 @@ public class OrderDaoImpl implements OrderDao {
 
         int orderId = keyHolder.getKey().intValue();
 
-        return userId;
+        return orderId;
 
 
     }
