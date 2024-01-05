@@ -22,11 +22,18 @@ public class ProductServiceImpl implements ProductService {
         return productDao.countProduct(productQueryParams) ;
     }
 
+
+
+
+
     @Override
     public List<Product> getProducts(ProductQueryParams productQueryParams) {
 
         return productDao.getProducts(productQueryParams);
     }
+
+
+
 
     @Override
     public Product getProductById(Integer productId) {
